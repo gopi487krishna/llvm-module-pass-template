@@ -1,4 +1,4 @@
-# LLVM Module Pass Template( WIP )
+# LLVM Module Pass Template
 
 Simple LLVM Module Pass Template  
 
