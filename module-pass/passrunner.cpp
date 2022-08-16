@@ -170,35 +170,35 @@ namespace mpass
 
 }
 
-void memorypass::PassRunner::addModuleToExclusionList(const std::string &path)
+void mpass::PassRunner::addModuleToExclusionList(const std::string &path)
 {
   m_module_exclusion_list.push_back(path);
 }
 
-void memorypass::PassRunner::addFunctionToExclusionList(const std::string &func_name)
+void mpass::PassRunner::addFunctionToExclusionList(const std::string &func_name)
 {
   m_function_exclusion_list.push_back(func_name);
 }
 
-void memorypass::PassRunner::addModulePostProcessCallback(ModulePostProcessCallback_T post_processing_callback)
+void mpass::PassRunner::addModulePostProcessCallback(ModulePostProcessCallback_T post_processing_callback)
 {
   m_module_post_process_callbacks.push_back(post_processing_callback);
 }
-void memorypass::PassRunner::addModulePreProcessCallback(ModulePreProcessCallback_T pre_processing_callback)
+void mpass::PassRunner::addModulePreProcessCallback(ModulePreProcessCallback_T pre_processing_callback)
 {
   m_module_pre_process_callbacks.push_back(pre_processing_callback);
 }
 
-void memorypass::PassRunner::addFunctionPostProcessCallback(FunctionPostProcessCallback_T post_processing_callback)
+void mpass::PassRunner::addFunctionPostProcessCallback(FunctionPostProcessCallback_T post_processing_callback)
 {
   m_function_post_process_callbacks.push_back(post_processing_callback);
 }
-void memorypass::PassRunner::addFunctionPreProcessCallback(FunctionPreProcessCallback_T pre_processing_callback)
+void mpass::PassRunner::addFunctionPreProcessCallback(FunctionPreProcessCallback_T pre_processing_callback)
 {
   m_function_pre_process_callbacks.push_back(pre_processing_callback);
 }
 
-bool memorypass::PassRunner::runPostProcessCallbacks(llvm::Module &M)
+bool mpass::PassRunner::runPostProcessCallbacks(llvm::Module &M)
 {
   bool is_successful = true;
 
@@ -210,7 +210,7 @@ bool memorypass::PassRunner::runPostProcessCallbacks(llvm::Module &M)
   return is_successful;
 }
 
-bool memorypass::PassRunner::runPreProcessCallbacks(llvm::Module &M)
+bool mpass::PassRunner::runPreProcessCallbacks(llvm::Module &M)
 {
   bool is_successful = true;
 
@@ -222,7 +222,7 @@ bool memorypass::PassRunner::runPreProcessCallbacks(llvm::Module &M)
   return is_successful;
 }
 
-bool memorypass::PassRunner::runPreProcessCallbacks(llvm::Function &F)
+bool mpass::PassRunner::runPreProcessCallbacks(llvm::Function &F)
 {
   bool is_successful = true;
 
@@ -234,7 +234,7 @@ bool memorypass::PassRunner::runPreProcessCallbacks(llvm::Function &F)
   return is_successful;
 }
 
-bool memorypass::PassRunner::runPostProcessCallbacks(llvm::Function &F)
+bool mpass::PassRunner::runPostProcessCallbacks(llvm::Function &F)
 {
   bool is_successful = true;
 
@@ -246,11 +246,11 @@ bool memorypass::PassRunner::runPostProcessCallbacks(llvm::Function &F)
   return is_successful;
 }
 
-char memorypass::PassRunner::s_id = 0;
+char mpass::PassRunner::s_id = 0;
 
 
 // To be used when compiling a normal program
- static RegisterStandardPasses Z(
-     PassManagerBuilder::EP_EnabledOnOptLevel0,
-     [](const PassManagerBuilder &Builder,
-        legacy::PassManagerBase &PM) { PM.add(new MemoryPass()); });
+ static llvm::RegisterStandardPasses Z(
+     llvm::PassManagerBuilder::EP_EnabledOnOptLevel0,
+     [](const llvm::PassManagerBuilder &Builder,
+        llvm::legacy::PassManagerBase &PM) { PM.add(new mpass::PassRunner()); });

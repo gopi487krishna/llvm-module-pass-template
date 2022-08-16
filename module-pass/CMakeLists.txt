@@ -3,7 +3,7 @@
 set(SOURCE_PATH ${CMAKE_SOURCE_DIR})
 cmake_path(GET SOURCE_PATH PARENT_PATH OS_PATH)
 
-add_library(MPass MODULE
+add_library(Mpass MODULE
     # List your source files here.
     passrunner.cpp
 )
